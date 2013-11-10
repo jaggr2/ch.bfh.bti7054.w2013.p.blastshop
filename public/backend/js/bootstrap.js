@@ -1,4 +1,4 @@
-knockout-3.0.0.js/*!
+/*!
  * Bootstrap v3.0.0
  *
  * Copyright 2013 Twitter, Inc
