@@ -7,8 +7,7 @@ GET        /                         controllers.Application.index()
 
 
 # Backend
-GET        /backend/dashboard        controllers.backend.AddressBackendController.dashboard()
-GET        /backend/address          controllers.backend.AddressBackendController.list()
+GET        /backend                  controllers.backend.AddressBackendController.index()
 
 
 #API

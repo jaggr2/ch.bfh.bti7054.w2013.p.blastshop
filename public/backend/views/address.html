@@ -1,0 +1,27 @@
+﻿<section>
+    <h2 data-bind="html: displayName"></h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Adresses</div>
+        <div class="panel-body">
+
+
+        </div>
+
+        <!-- Table -->
+        <table class="table" data-bind="foreach: addresses">
+            <tr data-bind="attr: { adrid: id }">
+                <td data-bind="text: preName"></td>
+                <td data-bind="text: name"></td>
+            </tr>
+        </table>
+    </div>
+
+    <form class="form-inline">
+        <span>Add new Address</span>
+        <input type="text" data-bind="value: formName" placeholder="Name" />
+        <input type="text" data-bind="value: formPreName" placeholder="Prename" />
+        <button type="submit" class="btn btn-primary" data-bind="click: submitAddress">Add</button>
+    </form>
+</section>

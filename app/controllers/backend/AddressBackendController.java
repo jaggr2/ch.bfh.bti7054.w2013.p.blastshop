@@ -11,12 +11,8 @@ import views.html.backend.*;
  */
 public class AddressBackendController extends Controller {
 
-    public static Result dashboard() {
-        return ok(dashboard.render(""));
-    }
-
-    public static Result list() {
-        return ok(addressList.render(""));
+    public static Result index() {
+        return ok(mainBackend.render("Blastshop Backend"));
     }
 
 }
