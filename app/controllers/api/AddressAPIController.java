@@ -1,8 +1,10 @@
 package controllers.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.api.Address;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Controller;
 
@@ -19,6 +21,46 @@ public class AddressAPIController extends Controller {
         ObjectMapper objectMapper = new ObjectMapper();
 
         return ok(objectMapper.writeValueAsString(Address.find.all()));
+    }
+
+    public static Result save() {
+
+        if(request().body() == null) {
+            return badRequest("body ist null");
+        }
+
+        if( request().body().asJson() == null) {
+            return badRequest("body json ist null");
+        }
+
+        JsonNode body = request().body().asJson();
+
+        if(body.isObject()) {
+
+
+
+            Long id = ( body.get("id") == null ? null : body.get("id").asLong());
+            Address addressToSave = null;
+
+            if(id != null && id > 0) {
+                addressToSave = Address.find.byId(id);
+                if(addressToSave == null) {
+                    return notFound("Address with ID " + id.toString() + " was not found!");
+                }
+            }
+            else {
+                addressToSave = new Address();
+            }
+
+            addressToSave.name = body.get("name").asText();
+            addressToSave.preName = body.get("preName").asText();
+
+            addressToSave.save();
+
+            return ok("Adresse gespeichert!");
+        }
+
+        return badRequest("body JSON is not an object!");
     }
 
 }

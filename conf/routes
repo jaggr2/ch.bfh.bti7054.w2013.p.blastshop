@@ -3,17 +3,19 @@
 # ~~~~
 
 # Home page
-GET        /                         controllers.Application.index()
+GET         /                       controllers.Application.index()
 
 
 # Backend
-GET        /backend                  controllers.backend.AddressBackendController.index()
+GET         /backend                controllers.backend.AddressBackendController.index()
 
 
 #API
-GET        /api/address/all          controllers.api.AddressAPIController.list()
+GET         /api/address/all        controllers.api.AddressAPIController.list()
+POST        /api/address            controllers.api.AddressAPIController.save()
+
 
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file             controllers.Assets.at(path="/public", file)
+GET         /assets/*file           controllers.Assets.at(path="/public", file)
