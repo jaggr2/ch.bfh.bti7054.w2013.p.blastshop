@@ -88,6 +88,24 @@
             });
         };
 
+    var isCtrl = false;
+
+    $(document).keyup(function (e) {
+        if(e.which == 17) isCtrl=false;
+    }).keydown(function (e) {
+            if(e.which == 17) isCtrl=true;
+            if(e.which == 65 && isCtrl == true) {
+                //run code for CTRL+A -- ie, save!
+                createAddress();
+                $('#addressName').focus();
+                return false;
+            }
+            if(e.which == 83 && isCtrl == true) {
+                //run code for CTRL+S -- ie, save!
+                submitAddress();
+                return false;
+            }
+        });
 
     return {
 
