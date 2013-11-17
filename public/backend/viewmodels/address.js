@@ -34,6 +34,10 @@
         selectAddress = function(adr){
             selectedAddress(adr);
         },
+        clearAddress = function() {
+
+            selectAddress(undefined);
+        },
         createAddress = function() {
             var newAddress = new Address({});
             addresses.push(newAddress);
@@ -53,7 +57,7 @@
 
                     addresses.remove(adr);
 
-                    selectAddress(undefined);
+                    clearAddress();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
@@ -76,14 +80,14 @@
                     console.log("ajax success textStatus: " + textStatus);
                     console.log("ajax success jqXHR: " + jqXHR);
 
-                    selectAddress(undefined);
+                    clearAddress();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
                     console.log("ajax error textStatus: " + textStatus);
                     console.log("ajax error errorThrown: " + errorThrown);
 
-                    alert("error: " + msg.responseText);
+                    alert("error: " + textStatus);
                 }
             });
         };
