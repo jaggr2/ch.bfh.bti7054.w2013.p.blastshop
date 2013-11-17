@@ -57,7 +57,7 @@ public class AddressAPIController extends Controller {
 
             addressToSave.save();
 
-            return ok("Adresse gespeichert!");
+            return ok("{ \"message\":\"Adresse gespeichert!\"}");
         }
 
         return badRequest("body JSON is not an object!");
@@ -91,7 +91,7 @@ public class AddressAPIController extends Controller {
 
             addressToDelete.delete();
 
-            return ok("Adresse gelöscht!");
+            return ok("{ \"message\":\"Adresse gelöscht!\"}");
         }
 
         return badRequest("body JSON is not an object!");

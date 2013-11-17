@@ -45,22 +45,51 @@
                 url:"/api/address",
                 data: ko.toJSON(adr).toString(),
                 dataType:"json",
-                contentType:"application/json"}).done(function(msg) {
+                contentType:"application/json",
+                success: function(data, textStatus, jqXHR) {
+                    console.log("ajax success data: " + data);
+                    console.log("ajax success textStatus: " + textStatus);
+                    console.log("ajax success jqXHR: " + jqXHR);
 
                     addresses.remove(adr);
 
-                    selectAddress(null);
+                    selectAddress(undefined);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ajax error xhr: " + jqXHR);
+                    console.log("ajax error textStatus: " + textStatus);
+                    console.log("ajax error errorThrown: " + errorThrown);
 
-                    alert( "success: " + msg );
-
-                }).fail(function(msg) {
-                    alert("error: " + msg.responseText)
+                    alert("error: " + msg.responseText);
+                }
                 });
+        },
+        submitAddress = function() {
+            $.ajax({
+                type:"POST",
+                url:"/api/address",
+                data: ko.toJSON(selectedAddress).toString(),
+                dataType:"json",
+                contentType:"application/json",
+                success: function(data, textStatus, jqXHR) {
+                    console.log("ajax success data: " + data);
+                    console.log("ajax success textStatus: " + textStatus);
+                    console.log("ajax success jqXHR: " + jqXHR);
+
+                    selectAddress(undefined);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ajax error xhr: " + jqXHR);
+                    console.log("ajax error textStatus: " + textStatus);
+                    console.log("ajax error errorThrown: " + errorThrown);
+
+                    alert("error: " + msg.responseText);
+                }
+            });
         };
 
 
     return {
-
 
         that: this,
         addresses: addresses,
@@ -68,46 +97,7 @@
         getAddresses: getAddresses,
         selectAddress: selectAddress,
         deleteAddress: deleteAddress,
-
-        submitAddress: function() {
-            /*   var newAddress = new Address({});
-            newAddress.name = this.formName();
-            newAddress.preName = this.formPrename();
-
-                  $.post("/api/address", "'" + test + "'", function(response) {
-             alert(response);
-             }, "json").fail(function(msg) {
-             alert("error: " + msg)
-             }); */
-
-            $.ajax({type:"POST",url:"/api/address",
-
-                data: ko.toJSON(selectedAddress).toString(),
-
-                dataType:"json",
-
-                contentType:"application/json"}).done(function(msg) {
-
-                    selectAddress(null);
-
-                    alert( "success: " + msg );
-                    /* formName("");
-                    formPrename(""); */
-
-                    /* $.getJSON('/api/address/all', { }, function(response) {
-                     var addresses = $.map(response, function(item) {return new Address(item) });
-                     system.log(addresses);
-                     that.addresses(addresses); //(addresses);
-                     }) */
-                }).fail(function(msg) {
-                    alert("error: " + msg.responseText)
-                });
-
-
-        },
-
-
-
+        submitAddress: submitAddress,
         displayName: 'Address',
 
         activate: function () {
