@@ -13,7 +13,7 @@ GET         /backend                controllers.backend.AddressBackendController
 #API
 GET         /api/address/all        controllers.api.AddressAPIController.list()
 POST        /api/address            controllers.api.AddressAPIController.save()
-
+DELETE      /api/address            controllers.api.AddressAPIController.delete()
 
 
 

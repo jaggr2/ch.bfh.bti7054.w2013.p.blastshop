@@ -12,16 +12,22 @@
         <!-- Table -->
         <table class="table" data-bind="foreach: addresses">
             <tr data-bind="attr: { adrid: id }">
-                <td data-bind="text: preName"></td>
+                <td data-bind="text: preName, click:$parent.selectAddress"></td>
                 <td data-bind="text: name"></td>
+                <td><button class="btn" data-bind="click: $parent.selectAddress">Edit</button>
+                    <button class="btn btn-danger" data-bind="click: $parent.deleteAddress">Delete</button></td>
             </tr>
         </table>
     </div>
 
-    <form class="form-inline">
-        <span>Add new Address</span>
-        <input type="text" data-bind="value: formName" placeholder="Name" />
-        <input type="text" data-bind="value: formPrename" placeholder="Prename" />
-        <button type="submit" class="btn btn-primary" data-bind="click: submitAddress">Add</button>
+    <button class="btn btn-success" data-bind="click: createAddress">Add</button>
+
+    <div data-bind="with:selectedAddress">
+    <form class="form-inline" data-bind="submit: $parent.submitAddress">
+        <span data-bind="text: editText">Edit Address</span>
+        <input type="text" data-bind="value: name" placeholder="Name" />
+        <input type="text" data-bind="value: preName" placeholder="Prename" />
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
+    </div>
 </section>

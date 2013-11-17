@@ -63,4 +63,38 @@ public class AddressAPIController extends Controller {
         return badRequest("body JSON is not an object!");
     }
 
+    public static Result delete() {
+        if(request().body() == null) {
+            return badRequest("body ist null");
+        }
+
+        if( request().body().asJson() == null) {
+            return badRequest("body json ist null");
+        }
+
+        JsonNode body = request().body().asJson();
+
+        if(body.isObject()) {
+
+
+            Long id = ( body.get("id") == null ? null : body.get("id").asLong());
+
+            if(id == null || id <= 0) {
+                // not saved address dont have to be deleted
+                return ok();
+            }
+
+            Address addressToDelete = Address.find.byId(id);
+            if(addressToDelete == null) {
+                return notFound("Address with ID " + id.toString() + " was not found!");
+            }
+
+            addressToDelete.delete();
+
+            return ok("Adresse gelöscht!");
+        }
+
+        return badRequest("body JSON is not an object!");
+    }
+
 }
