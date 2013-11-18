@@ -18,6 +18,8 @@
             }
         }, self);
 
+
+
         return self;
     };
 
@@ -76,11 +78,20 @@
                 dataType:"json",
                 contentType:"application/json",
                 success: function(data, textStatus, jqXHR) {
+
+                    var index = addresses.indexOf(data);
+
+                    clearAddress();
+
+                    // remove the item from the list and readd the server response
+                    addresses.pop();
+                    addresses.push(new Address(data));
+
                     console.log("ajax success data: " + data);
                     console.log("ajax success textStatus: " + textStatus);
                     console.log("ajax success jqXHR: " + jqXHR);
 
-                    clearAddress();
+
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);

@@ -23,7 +23,7 @@ public class AddressAPIController extends Controller {
         return ok(objectMapper.writeValueAsString(Address.find.all()));
     }
 
-    public static Result save() {
+    public static Result save() throws JsonProcessingException {
 
         if(request().body() == null) {
             return badRequest("body ist null");
@@ -57,7 +57,9 @@ public class AddressAPIController extends Controller {
 
             addressToSave.save();
 
-            return ok("{ \"message\":\"Adresse gespeichert!\"}");
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            return ok(objectMapper.writeValueAsString(addressToSave));
         }
 
         return badRequest("body JSON is not an object!");
