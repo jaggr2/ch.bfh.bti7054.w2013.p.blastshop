@@ -14,10 +14,11 @@
             <tr data-bind="attr: { adrid: id }">
                 <td data-bind="text: preName, click:$parent.selectAddress"></td>
                 <td data-bind="text: name"></td>
-                <td><a class="btn" data-bind="attr: { href: getURL }">Edit</a>
+                <td>
+                    <button type="button" class="btn btn-default" data-bind="click: $parent.editAddress">Edit</button>
 
                     <!-- <button class="btn" data-bind="click: $parent.selectAddress">Edit</button>-->
-                    <button class="btn btn-danger" data-bind="click: $parent.deleteAddress">Delete</button></td>
+                    <button class="btn btn-danger" data-bind="click: $parent.askDelete">Delete</button></td>
             </tr>
         </table>
     </div>

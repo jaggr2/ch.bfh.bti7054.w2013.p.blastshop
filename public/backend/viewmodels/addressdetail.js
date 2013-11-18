@@ -125,36 +125,47 @@
      }
      });
      */
-    return {
+    return function() {
 
-        that: this,
-        currentAddress: currentAddress,
-        loadAddress: loadAddress,
-        createAddress: createAddress,
-        deleteAddress: deleteAddress,
-        submitAddress: submitAddress,
-        displayName: ko.computed(function() {
-            if(currentAddress.id !== undefined && currentAddress.id() > 0) {
-                return "Bearbeite Adresse " + currentAddress.id() + ": ";
+        var self = this;
+        self.currentAddress = currentAddress;
+        self.loadAddress = loadAddress;
+        self.createAddress = createAddress;
+        self.deleteAddress = deleteAddress;
+        self.submitAddress = submitAddress;
+        self.displayName = ko.computed(function() {
+            if(self.currentAddress.id !== undefined && self.currentAddress.id() > 0) {
+                return "Bearbeite Adresse " + self.currentAddress.id() + ": ";
             }
             else {
                 return "Erstelle Adresse: ";
             }
-        }),
+        });
 
-    activate: function (addressId) {
-
-        //the router's activator calls this function and waits for it to complete before proceding
-        if(addressId !== undefined && addressId == 'create') {
-            createAddress();
-        }
-        else if (addressId !== undefined && addressId > 0) {
-            loadAddress(addressId);
-        }
-        else {
-            alert("Invalid parameter!");
+        self.closeAddress = function() {
+            router.navigateBack();
         }
 
+        self.askDeleteAddress = function() {
+            return app.showMessage('Soll die Adresse wirklich gelöscht werden?', 'Wirklich löschen?', ['Yes', 'No']).then(function(dialogResult){
+                if(dialogResult == 'Yes') {
+                    self.deleteAddress();
+                }
+            });
+        }
+
+        self.activate = function(addressId) {
+            //the router's activator calls this function and waits for it to complete before proceding
+            if(addressId !== undefined && addressId == 'create') {
+                self.createAddress();
+            }
+            else if (addressId !== undefined && addressId > 0) {
+                self.loadAddress(addressId);
+            }
+            else {
+                alert("Invalid parameter!");
+            }
+
+        }
     }
-};
 });

@@ -36,14 +36,17 @@
                 self.addresses(addresses); //(addresses);
             });
         },
-        selectAddress = function(adr){
+        editAddress = function(adr) {
+            router.navigate('address/' + adr.id());
+        },
+        /* selectAddress = function(adr){
             //selectedAddress(adr);
             //app.navigate()
         },
         clearAddress = function() {
 
             selectAddress(undefined);
-        },
+        }, */
         createAddress = function() {
             /*var newAddress = new Address({});
             addresses.push(newAddress);
@@ -133,7 +136,7 @@
         addresses: addresses,
         selectedAddress: selectedAddress,
         getAddresses: getAddresses,
-        selectAddress: selectAddress,
+        editAddress:    editAddress,
         deleteAddress: deleteAddress,
         submitAddress: submitAddress,
         displayName: 'Address',
@@ -146,11 +149,20 @@
 
             getAddresses();
         },
-        select: function(item) {
+        askDelete: function(item) {
+
+            return app.showMessage('Soll die Adresse wirklich gelöscht werden?', 'Wirklich löschen?', ['Yes', 'No']).then(function(dialogResult){
+                if(dialogResult == 'Yes') {
+                    deleteAddress(item);
+                }
+            });
+
             //the app model allows easy display of modal dialogs by passing a view model
             //views are usually located by convention, but you an specify it as well with viewUrl
-            //item.viewUrl = 'views/detail';
-            //app.showDialog(item);
+            /* item.viewUrl = 'views/yesnomessagebox';
+            item.messageBoxText = 'Wollen Sie die Adresse wirklich löschen?';
+            item.messageBoxTitle = 'Adresse wirklich löschen?'
+            app.showDialog(item); */
         }
     };
 });

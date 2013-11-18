@@ -6,7 +6,7 @@
         <span data-bind="text: editText">Edit Address</span>
         <input type="text" data-bind="value: name" id="addressName" placeholder="Name" />
         <input type="text" data-bind="value: preName" id="addressPreName" placeholder="Prename" />
-        <a href="#address" >Close</a>
+        <button class="btn btn-default" data-bind="click: $parent.closeAddress">Close</button>
         <button type="submit" class="btn btn-primary">Save (Ctrl+S)</button>
         <button class="btn btn-danger" data-bind="click: $parent.deleteAddress">Delete</button>
         <!-- <button class="btn" data-bind="click: $parent.clearAddress">Cancel (Esc)</button> -->
