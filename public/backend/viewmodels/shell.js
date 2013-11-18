@@ -8,9 +8,10 @@
         },
         activate: function () {
             router.map([
-                { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true },
-                { route: 'address', moduleId: 'viewmodels/address', nav: true }
+                { route: '',        title:'Welcome',    moduleId: 'viewmodels/welcome', nav: true },
+                { route: 'address',                     moduleId: 'viewmodels/address', nav: true },
+                { route: 'address/:id',                 moduleId: 'viewmodels/addressdetail',      nav: false },
+                { route: 'address/create',              moduleId: 'viewmodels/addressdetail',      nav: false }
             ]).buildNavigationModel();
             
             return router.activate();

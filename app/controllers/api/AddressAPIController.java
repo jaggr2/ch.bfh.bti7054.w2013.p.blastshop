@@ -23,6 +23,23 @@ public class AddressAPIController extends Controller {
         return ok(objectMapper.writeValueAsString(Address.find.all()));
     }
 
+    public static Result get(Long id) throws JsonProcessingException {
+
+        if(id == null || id <= 0) {
+            return badRequest();
+        }
+
+        Address addressToLoad = Address.find.byId(id);
+        if(addressToLoad == null) {
+            return notFound("Address with ID " + id.toString() + " was not found!");
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        return ok(objectMapper.writeValueAsString(addressToLoad));
+
+    }
+
     public static Result save() throws JsonProcessingException {
 
         if(request().body() == null) {

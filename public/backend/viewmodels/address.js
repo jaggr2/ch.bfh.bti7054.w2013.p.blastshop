@@ -1,8 +1,9 @@
-﻿define(['plugins/http', 'durandal/app', 'knockout', 'durandal/system'], function (http, app, ko, system) {
+﻿define(['plugins/http', 'durandal/app', 'knockout', 'durandal/system', 'plugins/router'], function (http, app, ko, system, router) {
     //Note: This module exports an object.
     //That means that every module that "requires" it will get the same object instance.
     //If you wish to be able to create multiple instances, instead export a function.
     //See the "welcome" module for an example of function export.
+
     var Address = function(data) {
         var self = this;
         self.id = ko.observable(data.id);
@@ -18,13 +19,15 @@
             }
         }, self);
 
-
+        self.getURL = ko.computed(function() {
+            return "#address/" + self.id();
+        }, self);
 
         return self;
     };
 
     var self = this;
-        addresses = ko.observableArray(),
+    addresses = ko.observableArray(),
         selectedAddress = ko.observable(),
         getAddresses = function() {
             return $.getJSON('/api/address/all', { }, function(response) {
@@ -34,16 +37,19 @@
             });
         },
         selectAddress = function(adr){
-            selectedAddress(adr);
+            //selectedAddress(adr);
+            //app.navigate()
         },
         clearAddress = function() {
 
             selectAddress(undefined);
         },
         createAddress = function() {
-            var newAddress = new Address({});
+            /*var newAddress = new Address({});
             addresses.push(newAddress);
-            selectAddress(newAddress);
+            selectAddress(newAddress); */
+
+            router.navigate('address/create');
         },
         deleteAddress = function(adr) {
             $.ajax({
@@ -68,7 +74,7 @@
 
                     alert("error: " + msg.responseText);
                 }
-                });
+            });
         },
         submitAddress = function() {
             $.ajax({
@@ -78,8 +84,6 @@
                 dataType:"json",
                 contentType:"application/json",
                 success: function(data, textStatus, jqXHR) {
-
-                    var index = addresses.indexOf(data);
 
                     clearAddress();
 
@@ -105,6 +109,7 @@
 
     var isCtrl = false;
 
+    /* works
     $(document).keyup(function (e) {
         if(e.which == 17) isCtrl=false;
     }).keydown(function (e) {
@@ -121,7 +126,7 @@
                 return false;
             }
         });
-
+      */
     return {
 
         that: this,
@@ -135,13 +140,11 @@
 
         activate: function () {
             //the router's activator calls this function and waits for it to complete before proceding
-            //if (this.addresses().length > 0) {
-            //    return;
-            //}
+            /* if (this.addresses().length > 0) {
+                return;
+            }  */
 
-
-
-            return getAddresses();
+            getAddresses();
         },
         select: function(item) {
             //the app model allows easy display of modal dialogs by passing a view model

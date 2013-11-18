@@ -1,0 +1,17 @@
+﻿<section>
+    <h2 data-bind="html: displayName"></h2>
+
+    <div data-bind="with:currentAddress">
+    <form class="form-inline" data-bind="submit: submitAddress">
+        <span data-bind="text: editText">Edit Address</span>
+        <input type="text" data-bind="value: name" id="addressName" placeholder="Name" />
+        <input type="text" data-bind="value: preName" id="addressPreName" placeholder="Prename" />
+        <a href="#address" >Close</a>
+        <button type="submit" class="btn btn-primary">Save (Ctrl+S)</button>
+        <button class="btn btn-danger" data-bind="click: $parent.deleteAddress">Delete</button>
+        <!-- <button class="btn" data-bind="click: $parent.clearAddress">Cancel (Esc)</button> -->
+    </form>
+    </div>
+
+
+</section>
