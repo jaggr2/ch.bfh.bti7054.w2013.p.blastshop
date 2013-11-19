@@ -1,37 +1,18 @@
-﻿define(['plugins/http', 'durandal/app', 'knockout', 'durandal/system', 'plugins/router'], function (http, app, ko, system, router) {
+﻿define(['plugins/http', 'durandal/app', 'knockout', 'durandal/system', 'plugins/router', 'lib/datamodel'], function (http, app, ko, system, router, dataModel) {
     //Note: This module exports an object.
     //That means that every module that "requires" it will get the same object instance.
     //If you wish to be able to create multiple instances, instead export a function.
     //See the "welcome" module for an example of function export.
 
-    var Address = function(data) {
-        var self = this;
-        self.id = ko.observable(data.id);
-        self.name  = ko.observable(data.name);
-        self.preName   = ko.observable(data.preName);
+    //var dataModel = require();
 
-        self.editText = ko.computed(function() {
-            if(this.id !== undefined && this.id() > 0) {
-                return "Bearbeite Adresse " + this.id() + ": ";
-            }
-            else {
-                return "Erstelle Adresse: ";
-            }
-        }, self);
-
-        self.getURL = ko.computed(function() {
-            return "#address/" + self.id();
-        }, self);
-
-        return self;
-    };
 
     var self = this;
     addresses = ko.observableArray(),
         selectedAddress = ko.observable(),
         getAddresses = function() {
             return $.getJSON('/api/address/all', { }, function(response) {
-                var addresses = $.map(response, function(item) {return new Address(item) });
+                var addresses = $.map(response, function(item) {return new dataModel.Address(item) });
                 system.log(addresses);
                 self.addresses(addresses); //(addresses);
             });
@@ -68,7 +49,7 @@
 
                     addresses.remove(adr);
 
-                    clearAddress();
+                    //clearAddress();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
@@ -78,8 +59,8 @@
                     alert("error: " + msg.responseText);
                 }
             });
-        },
-        submitAddress = function() {
+        };
+        /* submitAddress = function() {
             $.ajax({
                 type:"POST",
                 url:"/api/address",
@@ -108,7 +89,7 @@
                     alert("error: " + textStatus);
                 }
             });
-        };
+        }; */
 
     var isCtrl = false;
 
@@ -134,11 +115,11 @@
 
         that: this,
         addresses: addresses,
-        selectedAddress: selectedAddress,
+        /* selectedAddress: selectedAddress ,*/
         getAddresses: getAddresses,
         editAddress:    editAddress,
         deleteAddress: deleteAddress,
-        submitAddress: submitAddress,
+        /* submitAddress: submitAddress, */
         displayName: 'Address',
 
         activate: function () {

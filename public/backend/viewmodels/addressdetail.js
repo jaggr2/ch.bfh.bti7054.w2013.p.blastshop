@@ -1,28 +1,8 @@
-﻿define(['plugins/http', 'durandal/app', 'knockout', 'plugins/router'], function (http, app, ko, router) {
+﻿define(['plugins/http', 'durandal/app', 'knockout', 'plugins/router', 'lib/datamodel'], function (http, app, ko, router, dataModel) {
     //Note: This module exports an object.
     //That means that every module that "requires" it will get the same object instance.
     //If you wish to be able to create multiple instances, instead export a function.
     //See the "welcome" module for an example of function export.
-
-    var Address = function(data) {
-        var self = this;
-        self.id = ko.observable(data.id);
-        self.name  = ko.observable(data.name);
-        self.preName   = ko.observable(data.preName);
-
-        self.editText = ko.computed(function() {
-            if(this.id !== undefined && this.id() > 0) {
-                return "Bearbeite Adresse " + this.id() + ": ";
-            }
-            else {
-                return "Erstelle Adresse: ";
-            }
-        }, self);
-
-
-
-        return self;
-    };
 
     var self = this;
     currentAddress = ko.observable(),
@@ -38,7 +18,7 @@
                     console.log("ajax success textStatus: " + textStatus);
                     console.log("ajax success jqXHR: " + jqXHR);
 
-                    currentAddress(new Address(data));
+                    currentAddress(new dataModel.Address(data));
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
@@ -51,7 +31,7 @@
         },
         createAddress = function() {
 
-            currentAddress(new Address({}));
+            currentAddress(new dataModel.Address({}));
         },
         deleteAddress = function() {
             $.ajax({
@@ -87,7 +67,7 @@
                 contentType:"application/json",
                 success: function(data, textStatus, jqXHR) {
 
-                    currentAddress(new Address(data));
+                    currentAddress(new dataModel.Address(data));
 
                     console.log("ajax success data: " + data);
                     console.log("ajax success textStatus: " + textStatus);

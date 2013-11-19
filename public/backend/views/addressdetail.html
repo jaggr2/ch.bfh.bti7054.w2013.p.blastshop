@@ -1,17 +1,107 @@
 ﻿<section>
-    <h2 data-bind="html: displayName"></h2>
+<h2 data-bind="html: displayName"></h2>
+<div class="container" data-bind="with:currentAddress">
+    <form class="form" data-bind="submit: submitAddress">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Address <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> </div>
+                <div class="panel-body">
 
-    <div data-bind="with:currentAddress">
-    <form class="form-inline" data-bind="submit: submitAddress">
-        <span data-bind="text: editText">Edit Address</span>
-        <input type="text" data-bind="value: name" id="addressName" placeholder="Name" />
-        <input type="text" data-bind="value: preName" id="addressPreName" placeholder="Prename" />
-        <button class="btn btn-default" data-bind="click: $parent.closeAddress">Close</button>
-        <button type="submit" class="btn btn-primary">Save (Ctrl+S)</button>
-        <button class="btn btn-danger" data-bind="click: $parent.deleteAddress">Delete</button>
-        <!-- <button class="btn" data-bind="click: $parent.clearAddress">Cancel (Esc)</button> -->
-    </form>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="preName">First Name</label>
+                            <input class="form-control" name="firstname" id="preName" data-bind="value: preName" placeholder="First Name" type="text" required autofocus />
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <label for="preName">Last Name</label>
+                            <input class="form-control" name="lastname" data-bind="value: name" placeholder="Last Name" type="text" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="street">Address Line 1</label>
+                    <input type="text" class="form-control" id="street" placeholder="Street">
+                    <span class="help-block">Street address, P.O. box, c/o, ...</span>
+                </div>
+                <div class="form-group">
+                    <label for="addressline2">Address Line 2</label>
+                    <input type="text" class="form-control" id="addressline2" placeholder="Address Line 2">
+                    <span class="help-block">Apartment, unit, ...</span>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="City">
+                </div>
+                <div class="form-group">
+                    <label>Birth Date</label>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <select class="form-control">
+                                <option value="Day">Day</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <select class="form-control">
+                                <option value="Month">Month</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <select class="form-control">
+                                <option value="Year">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label>Gender</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" id="inlineCheckbox1" value="male" />
+                        Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" id="inlineCheckbox2" value="female" />
+                        Female
+                    </label>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"> <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> functions
+                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success ">Add</button></div>
+                </div>
+                <div class="panel-body">
+
+
+
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">contact <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span>
+                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success ">Add</button></div>
+                </div>
+                <div class="panel-body">
+
+
+
+
+                </div>
+            </div>
+        </div>
     </div>
-
-
+    <div class="row">
+        <button type="button" class="btn btn-default" data-bind="click: $parent.closeAddress">Close</button>
+        <button type="submit" class="btn btn-primary">Save (Ctrl+S)</button>
+        <button type="button" class="btn btn-danger" data-bind="click: $parent.askDeleteAddress">Delete</button>
+    </div>
+    </form>
+</div>
 </section>
