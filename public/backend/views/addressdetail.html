@@ -86,13 +86,23 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">contact <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span>
-                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success ">Add</button></div>
+                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success " data-bind="click: addContact">Add</button></div>
                 </div>
-                <div class="panel-body">
-
-
-
-
+                <div class="panel-body" data-bind="foreach: contacts">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4"><select class="form-control" data-bind="value: contactType">
+                                <option value="e">E-Mail</option>
+                                <option value="f">Fax</option>
+                                <option value="p">Phone</option>
+                                <option value="w">Web</option>
+                            </select></div>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="contactvalue" placeholder="No., Url, etc." data-bind="value: value">
+                            </div>
+                            <button type="button" class="btn btn-xs btn-danger" data-bind="click: $parent.removeContact">x</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

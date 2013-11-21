@@ -6,6 +6,22 @@ define(['knockout'], function (ko) {
             self.name  = ko.observable(data.name);
             self.preName   = ko.observable(data.preName);
 
+            self.contacts = ko.observableArray(ko.utils.arrayMap(data.contacts, function(contact) {
+                return { contactType: contact.contactType, value: contact.value };
+            }));
+
+            self.addContact = function() {
+                self.contacts.push({
+                    contactType: "",
+                    value: ""
+                });
+            };
+
+            self.removeContact = function(contact) {
+                self.contacts.remove(contact);
+            };
+
+
             self.editText = ko.computed(function() {
                 if(this.id !== undefined && this.id() > 0) {
                     return "Bearbeite Adresse " + this.id() + ": ";

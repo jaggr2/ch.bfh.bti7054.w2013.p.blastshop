@@ -6,6 +6,7 @@
         'transitions' : '/assets/lib/durandal.2.0.1/js/transitions',
         'knockout': '/assets/lib/knockout.2.3.0/knockout-2.3.0',
         'bootstrap': '/assets/lib/bootstrap.3.0.2/js/bootstrap',
+        'bootstrapdatepicker': '/assets/lib/bootstrap-datepicker.1.2.0/js/bootstrap-datepicker',
         'jquery': '/assets/lib/jquery.1.9.1/jquery-1.9.1',
         'lib': '/assets/backend/lib'
     },
@@ -13,7 +14,12 @@
         'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-       }
+       },
+        'bootstrapdatepicker': {
+            deps: ['bootstrap'],
+            exports: 'bootstrapdatepicker'
+        }
+
     }
 });
 

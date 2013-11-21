@@ -85,6 +85,8 @@
             });
         };
 
+
+
     /* var isCtrl = false;
 
 
@@ -147,5 +149,16 @@
             }
 
         }
+
+        /*
+        $('#city input').datepicker({
+            format: "dd.mm.yyyy",
+            weekStart: 1,
+            language: "de",
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true
+        });
+        */
     }
 });
