@@ -1,0 +1,134 @@
+@(signupForm: Form[_])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(_bootstrapInputHelper.f) }
+
+@main(Messages("playauthenticate.login.title")) {
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@Messages("playauthenticate.signup.title")</h2>
+
+        @if(signupForm.hasGlobalErrors) {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert"></button>
+                <span>@signupForm.globalError.message</span>
+            </div>
+        }
+
+        @if(flash.contains(FrontendBasicController.FLASH_ERROR_KEY)) {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert"></button>
+                @flash().get(FrontendBasicController.FLASH_ERROR_KEY)
+            </div>
+        }
+
+        @if(flash.contains(FrontendBasicController.FLASH_INFO_KEY)) {
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert"></button>
+                @flash().get(FrontendBasicController.FLASH_INFO_KEY)
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+
+@helper.form(routes.Signup.doSignup, 'class -> "form-horizontal", 'role -> "form") {
+
+
+    @select(signupForm("gender"),
+        options("MALE_PERSON"->Messages("blastshop.account.formofaddress.mr"),
+                "FEMALE_PERSON"->Messages("blastshop.account.formofaddress.mrs"),
+                "COMPANY"->Messages("blastshop.account.formofaddress.company"),
+                "GROUP"->Messages("blastshop.account.formofaddress.group")),
+        '_label -> Messages("blastshop.account.formofaddress"),
+        '_iconclass -> "icon-user",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("blastshop.account.formofaddress")
+    )
+
+    @inputText(
+        signupForm("firstName"),
+        '_showConstraints -> false,
+        '_label -> Messages("playauthenticate.signup.prename"),
+        '_iconclass -> "icon-user",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("playauthenticate.signup.prename")
+    )
+
+    @inputText(
+        signupForm("lastName"),
+        '_showConstraints -> false,
+        '_label -> Messages("playauthenticate.signup.name"),
+        '_iconclass -> "icon-user",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("playauthenticate.signup.name")
+    )
+
+    @inputText(
+        signupForm("email"),
+        '_showConstraints -> false,
+        '_label -> Messages("playauthenticate.login.email.placeholder"),
+        '_iconclass -> "icon-envelope",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("playauthenticate.login.email.placeholder")
+    )
+
+    @inputPassword(
+        signupForm("password"),
+        '_label -> Messages("playauthenticate.login.password.placeholder"),
+        '_iconclass -> "icon-lock",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("playauthenticate.login.password.placeholder")
+    )
+
+    @inputPassword(
+        signupForm("repeatPassword"),
+        '_label -> Messages("playauthenticate.login.password.repeat"),
+        '_showConstraints -> false,
+        '_error -> signupForm.error("password"),
+        '_iconclass -> "icon-ok",
+        '_labelclass -> "col-sm-4",
+        '_souroundingclass -> "col-sm-8",
+        'class -> "form-control",
+        'placeholder -> Messages("playauthenticate.login.password.repeat")
+    )
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="tnc"/> I agree to the <a href="/site/5/terms-and-conditions">Terms and conditions</a> and <a href="/site/4/privacy-protection">Privacy Policy</a>
+                </label>
+                <div id="register_tnc_error"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-default" id="register-submit-btn">@Messages("playauthenticate.signup.now") <span class="glyphicon glyphicon-chevron-right"></span></button>
+        </div>
+    </div>
+}
+    </div>
+    <div class="col-md-offset-1 col-md-5">
+
+        @Messages("playauthenticate.signup.oauth")
+        <br />
+        <br />
+        @* Display list of available providers *@
+        @_providerPartial(skipCurrent=false)
+    </div>
+</div>
+}

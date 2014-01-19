@@ -12,7 +12,7 @@
         selectedAddress = ko.observable(),
         getAddresses = function() {
             return $.getJSON('/api/address/all', { }, function(response) {
-                var addresses = $.map(response, function(item) {return new dataModel.Address(item) });
+                var addresses = $.map(response, function(item) {return new Address(item) });
                 system.log(addresses);
                 self.addresses(addresses); //(addresses);
             });
@@ -91,7 +91,7 @@
             });
         }; */
 
-    var isCtrl = false;
+    var isAlt = false;
 
     /* works
     $(document).keyup(function (e) {
@@ -129,6 +129,25 @@
             }  */
 
             getAddresses();
+
+
+            $(document).keyup(function (e) {
+                if(e.which == 18) isAlt=false;
+            }).keydown(function (e) {
+                    //alert(e.which); ESC=27
+                    if(e.which == 18) isAlt=true;
+                    if(e.which == 78 && isAlt == true) {
+                        //run code for ALT+N
+                        createAddress();
+                        //$('#addressName').focus();
+                        e.preventDefault();
+                    }
+                });
+
+        },
+        deactivate: function() {
+            $(document).off('keydown');
+            $(document).off('keyup');
         },
         askDelete: function(item) {
 

@@ -1,0 +1,32 @@
+@(collection: ArticleCollection)
+@import actions.GlobalContextHelper
+
+@scripts = {
+}
+
+@styles = {
+}
+
+@main(collection.getName(GlobalContextHelper.getUserLanguage()),"collection", scripts, styles, collection) {
+
+    <div class="row">
+    @collection.getFeaturedArticles.zipWithIndex.map { case(elem, index) =>
+        <div class="col-lg-4">
+
+            <h2>@elem.getPrimaryOption.getTitle(GlobalContextHelper.getUserLanguage)</h2>
+            @if(elem.getPrimaryOption.primaryPicture != null){
+                <img src="@routes.ShopController.getFile(elem.getPrimaryOption.primaryPicture.id, elem.getPrimaryOption.primaryPicture.fileName)" height="150" />
+            }
+            <p class="text-muted">@elem.getPrimaryOption().number</p>
+            <p><a class="btn btn-primary" href="@routes.ShopController.showArticle(collection.id, elem.id)" role="button">@Messages("blastshop.article.gotoarticle") &raquo;</a>
+               <a class="btn btn-default" href="#" onclick="addArticleToShoppingCart(@elem.getPrimaryOption.id)" role="button">@Messages("blastshop.article.order.now",FrontendBasicController.formatDecimal(elem.getPrimaryOption.sellPrice,"#.00"),elem.getPrimaryOption.sellPriceCurrency.code) &raquo;</a>
+            </p>
+        </div>
+    @if(index % 3 == 3) {
+    </div>
+    <div class="row">
+    }
+    }
+    </div>
+
+}

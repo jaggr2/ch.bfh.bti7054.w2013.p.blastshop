@@ -1,86 +1,98 @@
-﻿<section>
-<h2 data-bind="html: displayName"></h2>
-<div class="container" data-bind="with:currentAddress">
+﻿<section data-bind="with:currentAddress">
+<h2 data-bind="html: testtext()">id.formattedTitle</h2>
+<div class="container">
     <form class="form" data-bind="submit: submitAddress">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Address <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> </div>
                 <div class="panel-body">
-
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <label for="preName">First Name</label>
-                            <input class="form-control" name="firstname" id="preName" data-bind="value: preName" placeholder="First Name" type="text" required autofocus />
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <label for="preName">Last Name</label>
-                            <input class="form-control" name="lastname" data-bind="value: name" placeholder="Last Name" type="text" required />
+                        <label for="gender">Form of address</label>
+                        <select class="form-control" id="gender" data-bind="value: gender" required>
+                            <option value="MALE_PERSON">Mr.</option>
+                            <option value="FEMALE_PERSON">Mrs.</option>
+                            <option value="COMPANY">Company</option>
+                            <option value="GROUP">Group</option>
+                        </select>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="street">Address Line 1</label>
-                    <input type="text" class="form-control" id="street" placeholder="Street">
-                    <span class="help-block">Street address, P.O. box, c/o, ...</span>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6" data-bind="visible: !isCompanyOrGroup()">
+                            <label for="preName">First Name</label>
+                            <input class="form-control" name="firstname" id="preName" data-bind="value: preName, attr: { required: !isCompanyOrGroup() }" placeholder="First Name" type="text" />
+                        </div>
+                        <div class="col-xs-6 col-md-6" data-bind="css: { 'col-xs-6': !isCompanyOrGroup(), 'col-md-6': !isCompanyOrGroup(), 'col-xs-12': isCompanyOrGroup(), 'col-md-12': isCompanyOrGroup() }">
+                            <label for="name" data-bind="text: isCompanyOrGroup() ? 'Name' : 'Last Name'">Last Name</label>
+                            <input class="form-control" name="lastname" id="name" data-bind="value: name" placeholder="Name" type="text" required />
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="addressline2">Address Line 2</label>
-                    <input type="text" class="form-control" id="addressline2" placeholder="Address Line 2">
-                    <span class="help-block">Apartment, unit, ...</span>
+                    <label for="addressline1">Address</label>
+                    <input type="text" class="form-control" id="addressline1" placeholder="Street address, P.O. box, c/o, ..." data-bind="value: addressline1">
+                    <input type="text" class="form-control" id="addressline2" placeholder="Apartment, unit, ..." data-bind="value: addressline2">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="City">
+                    <input type="text" class="form-control" id="city" placeholder="City" data-bind="TypeAhead: cityDisplay, remote: '/api/region/find?t=COMMUNE&q=%QUERY', modelObjectUpdater: changeCity">
+                    <span data-bind="text: getCityParents()"></span> - <span data-bind="text: cityId"></span>
                 </div>
                 <div class="form-group">
-                    <label>Birth Date</label>
                     <div class="row">
-                        <div class="col-xs-4 col-md-4">
-                            <select class="form-control">
-                                <option value="Day">Day</option>
-                            </select>
+                        <div class="col-xs-6 col-md-6">
+                            <label for="birthdate">Birth Date</label>
+                            <input type="text" class="form-control" id="birthdate" placeholder="dd.mm.yyyy" data-bind="datepicker: birthdate, datepickerOptions: { format: 'dd.mm.yyyy',
+                                weekStart: 1,
+                                language: 'de',
+                                calendarWeeks: true,
+                                autoclose: true,
+                                todayHighlight: true
+                            } ">
                         </div>
-                        <div class="col-xs-4 col-md-4">
-                            <select class="form-control">
-                                <option value="Month">Month</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 col-md-4">
-                            <select class="form-control">
-                                <option value="Year">Year</option>
-                            </select>
+                        <div class="col-xs-6 col-md-6">
+
                         </div>
                     </div>
                 </div>
-                <label>Gender</label>
                 <div class="form-group">
-                    <label class="radio-inline">
-                        <input type="radio" name="gender" id="inlineCheckbox1" value="male" />
-                        Male
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="gender" id="inlineCheckbox2" value="female" />
-                        Female
-                    </label>
+                    <label >Tags</label>
+
                 </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading"> <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> functions
-                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success ">Add</button></div>
+                    <div class="pull-right"><button type="button" class="btn btn-xs btn-success "  data-bind="click: addRelation">Add</button></div>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" data-bind="foreach: relations">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" id="addressFunction" placeholder="Funktion" data-bind="TypeAhead: childFunctionDisplay, remote: '/api/addressfunction/find?q=%QUERY', idfield: addressFunctionId">
+                                <span data-bind="text: addressFunctionId"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="addressChild" placeholder="Adresse" data-bind="TypeAhead: childAddressDisplay, remote: '/api/address/find?q=%QUERY', idfield: childAddressId">
+                                <span data-bind="text: childAddressId"></span>
+                            </div>
 
+                            <!-- {
+                                name: 'Addresses',
+                                remote: '/api/address/find?q=%QUERY',
+                                limit: 10 } -->
 
-
-
+                            <button type="button" class="btn btn-xs btn-danger" data-bind="click: $parent.removeRelation">x</button> <!-- local: childAddress.suggestions, minLength: 2-->
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -92,10 +104,10 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4"><select class="form-control" data-bind="value: contactType">
-                                <option value="e">E-Mail</option>
-                                <option value="f">Fax</option>
-                                <option value="p">Phone</option>
-                                <option value="w">Web</option>
+                                <option value="EMAIL">E-Mail</option>
+                                <option value="FAX">Fax</option>
+                                <option value="PHONE">Phone</option>
+                                <option value="WEBSITE">Web</option>
                             </select></div>
                             <div class="col-md-7">
                                 <input type="text" class="form-control" id="contactvalue" placeholder="No., Url, etc." data-bind="value: value">
@@ -108,9 +120,11 @@
         </div>
     </div>
     <div class="row">
-        <button type="button" class="btn btn-default" data-bind="click: $parent.closeAddress">Close</button>
-        <button type="submit" class="btn btn-primary">Save (Ctrl+S)</button>
-        <button type="button" class="btn btn-danger" data-bind="click: $parent.askDeleteAddress">Delete</button>
+        <button type="button" class="btn btn-default" data-bind="click: $parent.closeAddress">Close <small>(ESC)</small></button>
+        <button type="submit" class="btn btn-primary">Save <small>(ALT+S)</small></button>
+        <button type="button" class="btn btn-danger" data-bind="click: $parent.askDeleteAddress, visible: !isNew()">Delete <small>(ALT+DELETE)</small></button>
+        <button type="button" class="btn btn-success" data-bind="click: $parent.createAddress, visible: !isNew()">Create <small>(ALT+N)</small></button>
+        <button type="button" class="btn btn-info" data-bind="click: $parent.copyAddress, visible: !isNew()">Copy <small>(ALT+C)</small></button>
     </div>
     </form>
 </div>

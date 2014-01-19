@@ -1,7 +1,33 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("NB Spezialitäten") {
 
-    Testnachricht
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h1>Unser Oster-Hit 2014</h1>
+        <img src="@routes.Assets.at("../../userfiles/pralinen-ei.jpg")" height="300" />
+        <p class="lead">Schokaladen-Ei gefüllt mit hausgemachten Pralinen Ihrer Wahl!</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Nur 19.90 CHF - Jetzt bestellen &raquo;</a></p>
+    </div>
+
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Sweet Dark-Light</h2>
+            <img src="@routes.Assets.at("../../userfiles/praline_croquant.jpg")" height="200" />
+            <p>Ein Exquisites Praline mit Alkohol für Geniesser.Für die,die etwas Besonderes zu schätzen wissen.</p>
+            <p><a class="btn btn-primary" href="#" role="button">Zum Artikel &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Praline 2</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-primary" href="#" role="button">Zum Artikel &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Praline 3</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+            <p><a class="btn btn-primary" href="#" role="button">Zum Artikel &raquo;</a></p>
+        </div>
+    </div>
 
 }

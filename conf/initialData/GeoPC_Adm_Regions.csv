@@ -1,0 +1,135 @@
+ISO;Country;Region1;Nb1;Region2;Nb2;Region3;Nb3;Region4;Nb4
+"AF";"Afghanistan";"Provinces";34;"";0;"";0;"";0
+"AL";"Albania";"Qarku";12;"Rrethi";36;"";0;"";0
+"DZ";"Algeria";"Wilaya";48;"";0;"";0;"";0
+"AD";"Andorra";"Parròquies";7;"";0;"";0;"";0
+"AO";"Angola";"Província";18;"Município";163;"";0;"";0
+"AR";"Argentina";"Provincias";24;"";0;"";0;"";0
+"AM";"Armenia";"Province/Marz";11;"Region";41;"";0;"";0
+"AU";"Australia";"States/Territories";9;"Regions";62;"LGA";738;"";0
+"AT";"Austria";"Länder";9;"Landbezirke";99;"";0;"";0
+"AZ";"Azerbaijan";"Regions";12;"Divisions";77;"Districts";4;"";0
+"BD";"Bangladesh";"Divisions";7;"Districts";64;"Upazilas";472;"";0
+"BY";"Belarus";"Voblasts";6;"Raions";74;"Councils";1009;"";0
+"BE";"Belgium";"Région";3;"Province";10;"Arrondissement";42;"Commune";570
+"BJ";"Benin";"Départements";12;"Arrondissements";77;"";0;"";0
+"BM";"Bermuda";"Parish";9;"";0;"";0;"";0
+"BT";"Bhutan";"Dzongkhag (districts)";20;"";0;"";0;"";0
+"BO";"Bolivia";"Departamento";9;"Provincia";112;"Municipio";321;"";0
+"BA";"Bosnia-Herzegovina";"Federations";3;"Cantons";17;"";0;"";0
+"BR";"Brazil";"Região";5;"Estado";27;"";0;"";0
+"BN";"Brunei";"District";4;"Mukim";39;"";0;"";0
+"BG";"Bulgaria";"Region";6;"Oblast";28;"Obshtina";264;"";0
+"BF";"Burkina Faso";"Régions";13;"Provinces";45;"";0;"";0
+"BI";"Burundi";"Province";17;"Commune";133;"Colline";2636;"";0
+"KH";"Cambodia";"Provinces";24;"Districts";185;"Communes";1622;"";0
+"CM";"Cameroon";"Régions";10;"Départements";58;"";0;"";0
+"CA";"Canada";"Provinces & Territories";13;"County / Division";209;"District";336;"";0
+"CV";"Cape Verde";"Concelhos";9;"Freguesias";17;"";0;"";0
+"CF";"Central African Republic";"Region";7;"Prefecture";17;"Sub-Prefecture";79;"Commune";177
+"TD";"Chad";"Préfecture";22;"Départment";53;"";0;"";0
+"CL";"Chile";"Regiones";15;"Provincias";53;"";0;"";0
+"CN";"China";"Province";33;"Prefecture / County";2419;"";0;"";0
+"CO";"Colombia";"Departamento";33;"Distrito";92;"Municipio";1125;"";0
+"CR";"Costa Rica";"Provincia";7;"Cantón";81;"";0;"";0
+"CI";"Cote d'Ivoire";"Régions";19;"Départements";58;"Sous-préfectures";232;"";0
+"HR";"Croatia";"Županije";21;"Naziv";915;"";0;"";0
+"CU";"Cuba";"Provincias";16;"Municipios";13;"";0;"";0
+"CY";"Cyprus";"Districts";6;"";0;"";0;"";0
+"CZ";"Czech Republic";"Kraj";14;"Okresy";77;"Obec";2586;"";0
+"DK";"Denmark";"Islands";3;"Region";11;"Kommune";130;"";0
+"DO";"Dominican Republic";"Regiones";9;"Provincias";34;"Municipios";143;"";0
+"EC";"Ecuador";"Provincias";24;"Cantones";219;"";0;"";0
+"SV";"El Salvador";"Departamento";14;"";0;"";0;"";0
+"EE";"Estonia";"Maakond";15;"Vald";242;"";0;"";0
+"ET";"Ethiopia";"Regions";11;"Zones";63;"Woredas";380;"";0
+"FI";"Finland";"Alue";7;"Maakunta";19;"Seutukunta";71;"Kunta";336
+"FR";"France";"Région";23;"Département";108;"Arrondissement";352;"Canton";3704
+"DE";"Germany";"Länder";16;"Regierungsbezirke";29;"Landkreis";383;"Amt";2411
+"GR";"Greece";"Peripheries";13;"Prefectures";54;"";0;"";0
+"GT";"Guatemala";"Departamentos";22;"";0;"";0;"";0
+"HT";"Haiti";"Départements";10;"Arrondissement";41;"";0;"";0
+"HN";"Honduras";"Departamento";18;"Municipio";298;"";0;"";0
+"HU";"Hungary";"Region";7;"Megyék";19;"Kistérségek";174;"";0
+"IS";"Iceland";"Landshlutar";8;"";0;"";0;"";0
+"IN";"India";"States / UT";35;"Divisions";59;"Districts";628;"Taluks";6073
+"ID";"Indonesia";"Provinces";33;"Regencies / Cities";438;"";0;"";0
+"IR";"Iran";"Provinces";30;"";0;"";0;"";0
+"IQ";"Iraq";"Governorates";18;"";0;"";0;"";0
+"IE";"Ireland";"Provinces";4;"Counties";26;"";0;"";0
+"IL";"Israel";"Districts";7;"Sub-districts";26;"";0;"";0
+"IT";"Italy";"Regione";20;"Provincia";110;"Comune";8092;"";0
+"JM";"Jamaica";"Parishes";14;"";0;"";0;"";0
+"JP";"Japan";"Region";8;"Prefecture";47;"District";1192;"Agglomeration";1095
+"KZ";"Kazakhstan";"Provinces";16;"Districts";192;"";0;"";0
+"KE";"Kenya";"Mkoa";8;"Wilaya";48;"Tarafa";266;"Kata";1137
+"KG";"Kyrgyzstan";"Province";9;"District";49;"";0;"";0
+"LV";"Latvia";"Plānošanas reģioni";5;"Novads";118;"Pagasts";554;"";0
+"LB";"Lebanon";"Governorates";6;"Districts";25;"";0;"";0
+"LR";"Liberia";"Counties";15;"Districts";131;"Clans";572;"";0
+"LY";"Libya";"Districts";22;"";0;"";0;"";0
+"LI";"Liechtenstein";"Communes";11;"";0;"";0;"";0
+"LT";"Lithuania";"Apskritys";10;"Savivaldybės";60;"Seniūnijos";63;"";0
+"LU";"Luxembourg";"Districts";3;"Cantons";12;"Communes";116;"";0
+"MK";"Macedonia";"Region";8;"Municipalities";84;"";0;"";0
+"MG";"Madagascar";"Province";6;"Faritra";22;"Fivondronana";111;"";0
+"MY";"Malaysia";"States (Negeri)";16;"Districts (Daerah)";450;"";0;"";0
+"MV";"Maldives";"Provinces";8;"Administrative Atolls";21;"Divisions";287;"";0
+"ML";"Mali";"Région";9;"Cercle";50;"Arrondissement";281;"";0
+"MT";"Malta";"Island";3;"Local council";68;"";0;"";0
+"MX";"Mexico";"Estado";32;"Municipio";2451;"";0;"";0
+"MD";"Moldova";"District";35;"Subdistrict";10;"";0;"";0
+"MC";"Monaco";"Quartiers";6;"";0;"";0;"";0
+"MN";"Mongolia";"Region";5;"Aimag";22;"Sum";334;"";0
+"ME";"Montenegro";"Opština";21;"";0;"";0;"";0
+"MA";"Morocco";"Régions";15;"Provinces";63;"";0;"";0
+"MZ";"Mozambique";"Regiăo";3;"Provincia";10;"Distrito";137;"";0
+"MM";"Myanmar";"States";17;"Districts";71;"";0;"";0
+"NP";"Nepal";"Regions";5;"Zones";14;"Districts";75;"";0
+"NL";"Netherlands";"Provincies";12;"Gemeenten";421;"";0;"";0
+"NZ";"New Zealand";"Regions";16;"Territorial authorities";71;"";0;"";0
+"NI";"Nicaragua";"Departamentos ";17;"";0;"";0;"";0
+"NE";"Niger";"Régions";8;"Départements";38;"Communes";265;"";0
+"NG";"Nigeria";"State";37;"LGA";720;"District";2737;"";0
+"NO";"Norway";"Landsdel";6;"Fylke";21;"Kommune";437;"";0
+"PK";"Pakistan";"Provinces";8;"GPO";72;"";0;"";0
+"PA";"Panama";"Provincia";12;"Distrito";77;"";0;"";0
+"PG";"Papua New Guinea";"Province";20;"District";85;"";0;"";0
+"PY";"Paraguay";"Departamento";18;"";0;"";0;"";0
+"PE";"Peru";"Departamentos";25;"Provincias";195;"Distritos";1834;"";0
+"PH";"Philippines";"Regions";17;"Provinces";80;"Municipalities";1634;"";0
+"PL";"Poland";"Województwo";16;"Powiat";381;"";0;"";0
+"PT";"Portugal";"Regiões autónomas";3;"Distritos";29;"Concelhos";308;"";0
+"RO";"Romania";"Regiuni";8;"Judeţe";42;"Comună / Municipiu";3185;"Oficii Poştale";65
+"RU";"Russia";"Федеральные округа";7;"Регион";81;"Район";2492;"Районов";125
+"SM";"San Marino";"Castelli";9;"";0;"";0;"";0
+"SN";"Senegal";"Région";14;"Département";45;"Arrondissement";123;"";0
+"RS";"Serbia";"Region";3;"Okrug";32;"Opština";174;"";0
+"SG";"Singapore";"Regions";5;"Districts";80;"Streets";2309;"";0
+"SK";"Slovakia";"Krajov";8;"Okresov";72;"Miest / Obci";1345;"";0
+"SI";"Slovenia";"Statistical regions";12;"Upravne enote";210;"";0;"";0
+"SO";"Somalia";"Regions";18;"Districts";90;"";0;"";0
+"ZA";"South Africa";"Provinces";9;"Districts";52;"Municipalities";252;"";0
+"KR";"South Korea";"Metropolitan";16;"City";249;"";0;"";0
+"ES";"Spain";"Comunidad autónoma";19;"Provincia";50;"";0;"";0
+"LK";"Sri Lanka";"Provinces";9;"Districts";25;"";0;"";0
+"SZ";"Swaziland";"Regions";4;"";0;"";0;"";0
+"SE";"Sweden";"Län";21;"Kommun";290;"";0;"";0
+"CH";"Switzerland";"Cantons";26;"Districts";147;"Communes";2495;"";0
+"TW";"Taiwan";"County";26;"";0;"";0;"";0
+"TZ";"Tanzania";"Mkoa";26;"Wilaya";131;"";0;"";0
+"TH";"Thailand";"Regions";6;"Provinces";78;"Districts";920;"";0
+"TL";"Timor-Leste";"Districts";13;"Sub-Districts";65;"Sucos";436;"";0
+"TN";"Tunisia";"Gouvernorats";24;"Déléguations";261;"";0;"";0
+"TR";"Turkey";"Bölgeler";7;"Iller";81;"Ilçeler";957;"";0
+"UG";"Uganda";"District";58;"County";162;"Sub-county";949;"";0
+"UA";"Ukraine";"Oбласть";27;"Pайон";571;"";0;"";0
+"GB";"United Kingdom";"Countries";5;"Counties";56;"Districts / Boroughs";406;"Wards";9004
+"US";"United States";"State";60;"County";3218;"";0;"";0
+"UY";"Uruguay";"Departamentos";19;"";0;"";0;"";0
+"UZ";"Uzbekistan";"Viloyat";14;"Tuman";184;"";0;"";0
+"VA";"Vatican City";"";0;"";0;"";0;"";0
+"VE";"Venezuela";"Regiones";9;"Estados";25;"";0;"";0
+"VN";"Vietnam";"Regions";8;"Tỉnh";64;"Huyện";673;"";0
+"YE";"Yemen";"Governorates";21;"";0;"";0;"";0
+"ZW";"Zimbabwe";"Provinces";8;"Districts";57;"";0;"";0

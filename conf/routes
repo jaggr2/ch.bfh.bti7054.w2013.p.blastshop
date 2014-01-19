@@ -2,21 +2,130 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET           /                       controllers.Application.index()
+######################################## FRONTEND ##############################################
+GET           /                                     controllers.ShopController.index()
+GET           /collection/:id                       controllers.ShopController.showCollection(id: Long)
+GET           /collection/:id/article/:artid        controllers.ShopController.showArticle(id: Long, artid: Long)
+GET           /file/:id/:filename                   controllers.ShopController.getFile(id: Long, filename: String)
+GET           /site/:id/:sitename                   controllers.ShopController.getSite(id: Long, sitename: String)
+GET           /checkout                             controllers.ShopController.showCheckout()
+GET           /shoppingcart/data                    controllers.ShopController.getBasket()
+POST          /shoppingcart/data                    controllers.ShopController.updateBasket()
+GET           /article/option/:id                   controllers.ShopController.getArticleOption(id: Long)
+GET           /account/orderhistory                 controllers.ShopController.showHistory()
+GET           /orderconfirmation                    controllers.ShopController.showOrderConfirmation()
+GET           /orderconfirmation/pdf/:id            controllers.ShopController.getPDF(id: Long)
+GET           /set/language/:id                     controllers.ShopController.setLanguage(id: String)
+
+######################################## BACKEND ##############################################
+GET           /backend                              controllers.backend.BackendController.index()
 
 
-# Backend
-GET           /backend                controllers.backend.AddressBackendController.index()
+######################################## REST API ##############################################
+# ADDRESS
+GET           /api/address/find                     controllers.api.AddressAPIController.lookup()
+GET           /api/address/all                      controllers.api.AddressAPIController.list()
+GET           /api/address/newest                   controllers.api.AddressAPIController.newest()
+GET           /api/address/:id                      controllers.api.AddressAPIController.get(id: Long)
+POST          /api/address                          controllers.api.AddressAPIController.save()
+DELETE        /api/address                          controllers.api.AddressAPIController.delete()
 
 
-#API
-GET           /api/address/all        controllers.api.AddressAPIController.list()
-GET           /api/address/:id        controllers.api.AddressAPIController.get(id: Long)
-POST          /api/address            controllers.api.AddressAPIController.save()
-DELETE        /api/address            controllers.api.AddressAPIController.delete()
+# ADDRESSFUNCTION
+GET           /api/addressfunction/find             controllers.api.AddressFunctionAPIController.lookup()
+GET           /api/addressfunction/all              controllers.api.AddressFunctionAPIController.list()
+GET           /api/addressfunction/:id              controllers.api.AddressFunctionAPIController.get(id: Long)
+POST          /api/addressfunction                  controllers.api.AddressFunctionAPIController.save()
+DELETE        /api/addressfunction                  controllers.api.AddressFunctionAPIController.delete()
 
+# ARTICLECOLLECTION
+GET           /api/articlecollection/find           controllers.api.ArticleCollectionAPIController.lookup()
+GET           /api/articlecollection/all            controllers.api.ArticleCollectionAPIController.list()
+GET           /api/articlecollection/:id            controllers.api.ArticleCollectionAPIController.get(id: Long)
+POST          /api/articlecollection                controllers.api.ArticleCollectionAPIController.save()
+DELETE        /api/articlecollection                controllers.api.ArticleCollectionAPIController.delete()
 
+# REGION
+GET           /api/region/find                      controllers.api.RegionAPIController.lookup()
+GET           /api/region/all                       controllers.api.RegionAPIController.list()
+GET           /api/region/:id                       controllers.api.RegionAPIController.get(id: Long)
+POST          /api/region                           controllers.api.RegionAPIController.save()
+DELETE        /api/region                           controllers.api.RegionAPIController.delete()
 
+# LANGUAGE
+GET           /api/language/find                    controllers.api.LanguageAPIController.lookup()
+GET           /api/language/all                     controllers.api.LanguageAPIController.list()
+GET           /api/language/:id                     controllers.api.LanguageAPIController.get(id: String)
+POST          /api/language                         controllers.api.LanguageAPIController.save()
+DELETE        /api/language                         controllers.api.LanguageAPIController.delete()
+
+# UNIT
+GET           /api/unit/find                        controllers.api.UnitAPIController.lookup()
+GET           /api/unit/all                         controllers.api.UnitAPIController.list()
+GET           /api/unit/:id                         controllers.api.UnitAPIController.get(id: Long)
+POST          /api/unit                             controllers.api.UnitAPIController.save()
+DELETE        /api/unit                             controllers.api.UnitAPIController.delete()
+
+# CURRENCY
+GET           /api/currency/find                    controllers.api.CurrencyAPIController.lookup()
+GET           /api/currency/all                     controllers.api.CurrencyAPIController.list()
+GET           /api/currency/:id                     controllers.api.CurrencyAPIController.get(id: String)
+POST          /api/currency                         controllers.api.CurrencyAPIController.save()
+DELETE        /api/currency                         controllers.api.CurrencyAPIController.delete()
+
+# ARTICLE
+GET           /api/article/all                      controllers.api.ArticleAPIController.list()
+GET           /api/article/:id                      controllers.api.ArticleAPIController.get(id: Long)
+POST          /api/article                          controllers.api.ArticleAPIController.save()
+DELETE        /api/article                          controllers.api.ArticleAPIController.delete()
+
+# FILE
+GET           /api/file/:id/:filename               controllers.api.FileAPIController.get(id: Long, filename: String)
+POST          /api/file/create/fromform             controllers.api.FileAPIController.postFileMultipart(id: Long = 0L)
+
+# Document
+GET           /api/document/newestClientOrders      controllers.api.DocumentAPIController.newestClientOrders()
+
+######################################## SIGNUP ##############################################
+GET           /login                                controllers.Signup.login
+POST          /login                                controllers.Signup.doLogin
+
+GET           /logout                               com.feth.play.module.pa.controllers.Authenticate.logout
+GET           /authenticate/:provider               com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
+
+GET           /signup                               controllers.Signup.signup
+POST          /signup                               controllers.Signup.doSignup
+
+GET           /signup/unverified                    controllers.Signup.unverified
+GET           /authenticate/:provider/denied        controllers.Signup.oAuthDenied(provider: String)
+
+GET           /signup/verify/:token                 controllers.Signup.verify(token: String)
+GET           /signup/exists                        controllers.Signup.exists
+
+GET           /signup/password/reset/:token         controllers.Signup.resetPassword(token: String)
+POST          /signup/password/reset                controllers.Signup.doResetPassword
+
+######################################## ACCOUNT ##############################################
+GET           /accounts/password/change             controllers.AccountController.changePassword
+POST          /accounts/password/change             controllers.AccountController.doChangePassword
+
+GET           /accounts/verify                      controllers.AccountController.verifyEmail
+
+GET           /accounts/add                         controllers.AccountController.link
+
+GET           /accounts/link                        controllers.AccountController.askLink
+POST          /accounts/link                        controllers.AccountController.doLink
+
+GET           /accounts/merge                       controllers.AccountController.askMerge
+POST          /accounts/merge                       controllers.AccountController.doMerge
+
+GET           /accounts/profile                     controllers.AccountController.profile
+POST          /accounts/profile                     controllers.AccountController.doProfile
+
+GET           /login/password/forgot                controllers.Signup.forgotPassword(email: String ?= "")
+POST          /login/password/forgot                controllers.Signup.doForgotPassword
+GET           /assets/javascript/routes.js          controllers.Signup.jsRoutes
+
+######################################## ASSETS ##############################################
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file           controllers.Assets.at(path="/public", file)
+GET           /assets/*file                         controllers.Assets.at(path="/public", file)

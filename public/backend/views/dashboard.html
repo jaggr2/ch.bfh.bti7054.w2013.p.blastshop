@@ -1,0 +1,70 @@
+﻿<section>
+    <h2 data-bind="html: displayName"></h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">5 newest Addresses</div>
+        <div class="panel-body">
+
+            <!-- Table -->
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Form</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Created on</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: newestAddresses">
+                    <tr>
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: getGender()"></td>
+                        <td data-bind="text: getFullName()"></td>
+                        <td data-bind="text: getFullAddress()"></td>
+                        <td data-bind="text: moment(createdOn()).format('lll')"></td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" data-bind="click: $parent.editAddress">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-default btn-sm left" data-bind="click: showAddresses">Show all addresses</button>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">5 newest Orders</div>
+        <div class="panel-body">
+
+            <!-- Table -->
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Row Count</th>
+                    <th>Grand Total</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: newestClientOrders">
+                <tr>
+                    <td data-bind="text: id"></td>
+                    <td data-bind="text: clientAddress().getFullName()"></td>
+                    <td data-bind="text: clientAddress().getFullAddress()"></td>
+                    <td data-bind="text: rowCount()"></td>
+                    <td data-bind="text: grandTotal()"></td>
+                    <td>
+                        <a class="btn btn-default btn-sm" data-bind="attr: { href: '/orderconfirmation/pdf/' + id(), target: '_blank' }">Show PDF</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

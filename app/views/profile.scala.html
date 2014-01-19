@@ -1,0 +1,106 @@
+@(profileForm: Form[_])
+
+@import com.feth.play.module.pa.views.html._
+@import actions.UserAddress
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(_bootstrapInputHelper.f) }
+
+@scripts = {
+}
+
+@styles = {
+
+}
+
+@main(Messages("playauthenticate.profile.title"),"profile", scripts, styles) {
+    <h1>@Messages("playauthenticate.profile.title")</h1>
+
+    <div class="row" data-bind="with: shoppingCart().clientAddress">
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                <div class="panel-heading">Address <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6">
+                                <label for="gender">Form of address</label>
+                                <select class="form-control" id="gender" data-bind="value: gender" required>
+                                    <option value="MALE_PERSON">Mr.</option>
+                                    <option value="FEMALE_PERSON">Mrs.</option>
+                                    <option value="COMPANY">Company</option>
+                                    <option value="GROUP">Group</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6" data-bind="visible: !isCompanyOrGroup()">
+                                <label for="preName">First Name</label>
+                                <input class="form-control" name="firstname" id="preName" data-bind="value: preName, attr: { required: !isCompanyOrGroup() }" placeholder="First Name" type="text" />
+                            </div>
+                            <div class="col-xs-6 col-md-6" data-bind="css: { 'col-xs-6': !isCompanyOrGroup(), 'col-md-6': !isCompanyOrGroup(), 'col-xs-12': isCompanyOrGroup(), 'col-md-12': isCompanyOrGroup() }">
+                                <label for="name" data-bind="text: isCompanyOrGroup() ? 'Name' : 'Last Name'">Last Name</label>
+                                <input class="form-control" name="lastname" id="name" data-bind="value: name" placeholder="Name" type="text" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressline1">Address</label>
+                        <input type="text" class="form-control" id="addressline1" placeholder="Street address, P.O. box, c/o, ..." data-bind="value: addressline1">
+                        <input type="text" class="form-control" id="addressline2" placeholder="Apartment, unit, ..." data-bind="value: addressline2">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="City" data-bind="TypeAhead: cityDisplay, remote: '/api/region/find?t=COMMUNE&q=%QUERY', modelObjectUpdater: changeCity">
+                        <span data-bind="text: getCityParents()"></span> - <span data-bind="text: cityId"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="updateShoppingCart()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                <div class="panel-heading">Account details of <span data-bind="text: preName">preName</span> <span data-bind="text: name">lastName</span> </div>
+                <div class="panel-body">
+                    <ul>
+                        @* <li>@UserAddress.current().get.email @if(!localUser.emailValidated && localUser.email) {
+                            (<a href="@routes.AccountController.verifyEmail">unverified - click to verify</a>)
+                        } else {
+                            (verified)
+                        }</li> *@
+                        <li>@defining(UserAddress.current().getProviders()) { providers =>
+                            @if(providers.size() > 0) {
+                                @if(providers.size() == 1) {
+                                    @Messages("playauthenticate.profile.providers_one")
+                                } else {
+                                    @Messages("playauthenticate.profile.providers_many",providers.size().toString())
+                                }
+                                @for(p <- providers) {
+                                    @_providerIcon(p)
+                                }
+                                <br/>
+                            }
+                        }</li>
+                        <li>
+                        @currentAuth() { auth =>
+                            @Messages("playauthenticate.profile.logged") @_providerIcon(auth.getProvider())<br/>
+                            @if(auth.expires() != -1){
+                                @Messages("playauthenticate.profile.session", auth.getId(), FrontendBasicController.formatTimestamp(auth.expires()))
+                            } else {
+                                @Messages("playauthenticate.profile.session_endless", auth.getId())
+                            }
+                        }
+                        </li>
+                        <li><a href="@routes.AccountController.changePassword">@Messages("playauthenticate.profile.password_change")</a></li>
+                        @if(UserAddress.current().getProfilePictureUrl() != null && !UserAddress.current().getProfilePictureUrl().isEmpty()){<li><img src="@UserAddress.current().getProfilePictureUrl()" alt="" width="200" /></li>}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}

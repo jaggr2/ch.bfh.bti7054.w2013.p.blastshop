@@ -1,0 +1,12 @@
+@(elements: helper.FieldElements)
+<div class="form-group@if(elements.hasErrors) { has-warning}">
+    <label class="control-label @elements.args.get('_labelclass)" for="@elements.id">@elements.label</label>
+        @if( elements.args.contains('_souroundingclass) ) {
+        <div class="@elements.args.get('_souroundingclass)">
+        }
+    @elements.input
+    <span class="help-inline help-small no-left-padding@if(elements.hasErrors) { text-warning}">@elements.errors.mkString(", ")</span>
+        @if( elements.args.contains('_souroundingclass) ) {
+        </div>
+        }
+</div>

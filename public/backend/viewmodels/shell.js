@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'durandal/app'], function (router, app) {
+﻿define(['plugins/router', 'durandal/app', 'lib/datamodel'], function (router, app, dataModel) {
     return {
         router: router,
         search: function() {
@@ -8,12 +8,17 @@
         },
         activate: function () {
             router.map([
-                { route: '',        title:'Welcome',    moduleId: 'viewmodels/welcome', nav: true },
+                { route: '',        title:'Dashboard',    moduleId: 'viewmodels/dashboard', nav: true },
                 { route: 'address',                     moduleId: 'viewmodels/address', nav: true },
                 { route: 'address/:id',                 moduleId: 'viewmodels/addressdetail',      nav: false },
-                { route: 'address/create',              moduleId: 'viewmodels/addressdetail',      nav: false }
+                { route: 'address/create',              moduleId: 'viewmodels/addressdetail',      nav: false },
+                { route: 'article',                     moduleId: 'viewmodels/article', nav: true },
+                { route: 'article/:id',                 moduleId: 'viewmodels/articledetail',      nav: false },
+                { route: 'article/create',              moduleId: 'viewmodels/articledetail',      nav: false }
             ]).buildNavigationModel();
-            
+
+            dataModel.loadGlobalDatastore();
+
             return router.activate();
         }
     };

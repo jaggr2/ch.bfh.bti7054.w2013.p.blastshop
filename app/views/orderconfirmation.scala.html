@@ -1,0 +1,18 @@
+@(confirmedOrder : Document)
+
+@scripts = {
+}
+
+@styles = {
+}
+
+@main("Order confirmation","orderconfirmation", scripts, styles, null) {
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h1>@Messages("blastshop.orderconfirmation.thankyou")</h1>
+        <p>@Messages("blastshop.orderconfirmation.ordersended")</p>
+        <p>@Messages("blastshop.orderconfirmation.ordernumber",confirmedOrder.id)</p>
+
+        <a href="@routes.ShopController.getPDF(confirmedOrder.id)" class="btn btn-primary btn-lg" target="_blank">@Messages("blastshop.orderconfirmation.saveconfirmationaspdf")</a>
+    </div>
+}

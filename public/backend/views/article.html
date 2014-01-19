@@ -1,0 +1,25 @@
+<section>
+    <h2 data-bind="html: displayName"></h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Articles</div>
+        <div class="panel-body">
+
+
+        </div>
+
+        <table class="table" data-bind="foreach: articles">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td ><div data-bind="foreach: options"><span data-bind="text: number" ></span><br /></div></td>
+                <td>
+                    <button type="button" class="btn btn-default" data-bind="click: $parent.editArticle">Edit</button>
+                    <button class="btn btn-danger" data-bind="click: $parent.askDelete">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <button class="btn btn-success" data-bind="click: createArticle">Add new article <small>(Alt+N)</small></button>
+
+</section>

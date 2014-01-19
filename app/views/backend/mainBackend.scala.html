@@ -17,26 +17,61 @@
         <link rel="apple-touch-startup-image" href="lib/durandal/img/ios-startup-image-portrait.png" media="(orientation:portrait)" />
         <link rel="apple-touch-icon" href="lib/durandal/img/icon.png"/> *@
 
+
+
         <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap.3.0.2/css/bootstrap.css")" />
         <link rel="stylesheet" href="@routes.Assets.at("lib/font-awesome.4.0.1/css/font-awesome.min.css")" />
         <link rel="stylesheet" href="@routes.Assets.at("lib/durandal.2.0.1/css/durandal.css")" />
+        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap-datepicker.1.2.0/css/datepicker.css")" />
+
+        <link rel="stylesheet" href="@routes.Assets.at("lib/dropzone.3.8.2/css/dropzone.css")" />
 
         <link rel="stylesheet" href="@routes.Assets.at("backend/css/backendMain.css")" />
-
     </head>
 
     <body>
 
         <div id="applicationHost">
-            <div class="splash">
-                <div class="message">
-                  Starting up Blastshop Management App
+                <!-- Fixed navbar -->
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Blastshop Management App</a>
+                    </div>
                 </div>
-                <i class="icon-spinner icon-2x icon-spin active"></i>
+            </div>
+
+            <div class="container">
+                <section>
+                <h2>Loading Blastshop Management App...</h2>
+                </section>
             </div>
         </div>
 
+            <!-- Modal -->
+        <div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Dateien hochladen</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/api/file/create/fromform" class="dropzone" id="backenddropzone">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Ohne Zuweisung schliessen</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-hidden="true">Hochgeladene Bilder zuweisen und schliessen</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
         <!-- Bootstrap core JavaScript -->
-        <script src="@routes.Assets.at("lib/require.2.1.8/require.js") " data-main="/assets/backend/main"></script>
+        <script src="@routes.Assets.at("lib/require.2.1.8/require.js")" data-main="/assets/backend/main" ></script>
     </body>
 </html>

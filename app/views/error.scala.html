@@ -1,0 +1,10 @@
+@(title: String, message: String, alertType: String)
+
+@main(Messages("playauthenticate.login.title")) {
+
+    <h3 class="form-title">@title</h3>
+
+    <div class="alert alert-@alertType fade in">
+            @message
+    </div>
+}

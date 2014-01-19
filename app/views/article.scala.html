@@ -1,0 +1,23 @@
+@(collection: ArticleCollection, articleItem: Article)
+@import actions.GlobalContextHelper
+
+@scripts = {
+}
+
+@styles = {
+}
+
+@main(articleItem.getPrimaryOption.getTitle(GlobalContextHelper.getUserLanguage),"collection", scripts, styles, collection) {
+
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h1>@articleItem.getPrimaryOption.getTitle(GlobalContextHelper.getUserLanguage) </h1>
+        <p><small>Artikel-Nr. @articleItem.getPrimaryOption.number</small></p>
+        @if(articleItem.getPrimaryOption.primaryPicture != null){
+            <img src="@routes.ShopController.getFile(articleItem.getPrimaryOption.primaryPicture.id, articleItem.getPrimaryOption.primaryPicture.fileName)" height="200" />
+        }
+
+        <p class="lead">@articleItem.getPrimaryOption.getDescription(GlobalContextHelper.getUserLanguage())</p>
+        <p><a class="btn btn-lg btn-success" href="#" onclick="addArticleToShoppingCart(@articleItem.getPrimaryOption.id)" role="button">@Messages("blastshop.article.order.now",FrontendBasicController.formatDecimal(articleItem.getPrimaryOption.sellPrice,"#.00"),articleItem.getPrimaryOption.sellPriceCurrency.code) &raquo;</a></p>
+    </div>
+}

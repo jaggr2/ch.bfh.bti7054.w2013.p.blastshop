@@ -4,8 +4,8 @@
     //If you wish to be able to create multiple instances, instead export a function.
     //See the "welcome" module for an example of function export.
 
-    var self = this;
-    currentAddress = ko.observable(),
+    var module = this;
+    currentAddress = ko.observable(null),
 
         loadAddress = function(id) {
             $.ajax({
@@ -18,7 +18,7 @@
                     console.log("ajax success textStatus: " + textStatus);
                     console.log("ajax success jqXHR: " + jqXHR);
 
-                    currentAddress(new dataModel.Address(data));
+                    currentAddress(new Address(data));
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
@@ -29,9 +29,12 @@
                 }
             });
         },
+        loadNewAddress = function() {
+            currentAddress(null);
+            currentAddress(new Address({}));
+        },
         createAddress = function() {
-
-            currentAddress(new dataModel.Address({}));
+            router.navigate('address/create')
         },
         deleteAddress = function() {
             $.ajax({
@@ -45,7 +48,7 @@
                     console.log("ajax success textStatus: " + textStatus);
                     console.log("ajax success jqXHR: " + jqXHR);
 
-                    currentAddress(undefined);
+                    currentAddress(null);
 
                     router.navigate('address', true);
                 },
@@ -54,7 +57,7 @@
                     console.log("ajax error textStatus: " + textStatus);
                     console.log("ajax error errorThrown: " + errorThrown);
 
-                    alert("error: " + msg.responseText);
+                    alert("error: " + textStatus);
                 }
             });
         },
@@ -67,13 +70,12 @@
                 contentType:"application/json",
                 success: function(data, textStatus, jqXHR) {
 
-                    currentAddress(new dataModel.Address(data));
+                    if(currentAddress().id() == null) {
+                        router.navigate('address/' + data.id, { replace: true, trigger: false })
+                    }
+                    currentAddress(new Address(data));
 
-                    console.log("ajax success data: " + data);
-                    console.log("ajax success textStatus: " + textStatus);
-                    console.log("ajax success jqXHR: " + jqXHR);
-
-
+                    console.log("address with id " + data.id + " successfully saved!");
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ajax error xhr: " + jqXHR);
@@ -83,82 +85,90 @@
                     alert("error: " + textStatus);
                 }
             });
+        },
+        copyAddress = function() {
+            if(currentAddress() != null) {
+                currentAddress().initCopy();
+                router.navigate('address/create', { replace: false, trigger: false })
+            }
         };
 
 
 
-    /* var isCtrl = false;
-
-
-     $(document).keyup(function (e) {
-     if(e.which == 17) isCtrl=false;
-     }).keydown(function (e) {
-     if(e.which == 17) isCtrl=true;
-     if(e.which == 65 && isCtrl == true) {
-     //run code for CTRL+A -- ie, save!
-     createAddress();
-     $('#addressName').focus();
-     return false;
-     }
-     if(e.which == 83 && isCtrl == true) {
-     //run code for CTRL+S -- ie, save!
-     submitAddress();
-     return false;
-     }
-     });
-     */
+    //Note: This module exports a function. That means that you, the developer, can create multiple instances.
+    //This pattern is also recognized by Durandal so that it can create instances on demand.
+    //If you wish to create a singleton, you should export an object instead of a function.
+    //See the "flickr" module for an example of object export.
     return function() {
 
         var self = this;
+        var isAlt = false;
         self.currentAddress = currentAddress;
         self.loadAddress = loadAddress;
         self.createAddress = createAddress;
         self.deleteAddress = deleteAddress;
         self.submitAddress = submitAddress;
-        self.displayName = ko.computed(function() {
-            if(self.currentAddress.id !== undefined && self.currentAddress.id() > 0) {
-                return "Bearbeite Adresse " + self.currentAddress.id() + ": ";
-            }
-            else {
-                return "Erstelle Adresse: ";
-            }
-        });
+        self.loadNewAddress = loadNewAddress;
+        self.copyAddress = copyAddress;
 
-        self.closeAddress = function() {
-            router.navigateBack();
-        }
+        self.closeAddress = function () {
+            router.navigate('address');
+        };
 
-        self.askDeleteAddress = function() {
-            return app.showMessage('Soll die Adresse wirklich gelöscht werden?', 'Wirklich löschen?', ['Yes', 'No']).then(function(dialogResult){
-                if(dialogResult == 'Yes') {
+        self.askDeleteAddress = function () {
+            return app.showMessage('Soll die Adresse wirklich gelöscht werden?', 'Wirklich löschen?', ['Yes', 'No']).then(function (dialogResult) {
+                if (dialogResult == 'Yes') {
                     self.deleteAddress();
                 }
             });
-        }
+        };
 
         self.activate = function(addressId) {
             //the router's activator calls this function and waits for it to complete before proceding
             if(addressId !== undefined && addressId == 'create') {
-                self.createAddress();
+                self.loadNewAddress();
             }
             else if (addressId !== undefined && addressId > 0) {
                 self.loadAddress(addressId);
             }
             else {
                 alert("Invalid parameter!");
+                router.navigateBack();
             }
 
-        }
+            $(document).keyup(function (e) {
+                if(e.which == 18) isAlt=false;
+            }).keydown(function (e) {
+                    //alert(e.which);
+                    if(e.which == 18) isAlt=true;
+                    if(e.which == 78 && isAlt == true) {
+                        //run code for ALT+N
+                        self.createAddress();
+                        e.preventDefault();
+                    }
+                    if(e.which == 83 && isAlt == true) {
+                        //run code for ALT+S
+                        self.submitAddress();
+                        e.preventDefault();
+                    }
+                    if(e.which == 67 && isAlt == true) {
+                        //run code for ALT+C
+                        self.copyAddress();
+                        e.preventDefault();
+                    }
+                    if(e.which == 46 && isAlt == true) {
+                        //run code for ALT+DELETE
+                        self.askDeleteAddress();
+                        e.preventDefault();
+                    }
+                    if(e.which == 27) self.closeAddress(); // 27=ESC-Key
+                });
 
-        /*
-        $('#city input').datepicker({
-            format: "dd.mm.yyyy",
-            weekStart: 1,
-            language: "de",
-            calendarWeeks: true,
-            autoclose: true,
-            todayHighlight: true
-        });
-        */
+        };
+
+        self.deactivate = function() {
+            $(document).off('keydown');
+            $(document).off('keyup');
+        }
     }
 });

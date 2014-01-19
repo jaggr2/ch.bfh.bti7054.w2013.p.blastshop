@@ -6,24 +6,35 @@
         <div class="panel-heading">Adresses</div>
         <div class="panel-body">
 
+            <!-- Table -->
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Form</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: addresses">
+                    <tr>
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: getGender()"></td>
+                        <td data-bind="text: getFullName()"></td>
+                        <td data-bind="text: getFullAddress()"></td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" data-bind="click: $parent.editAddress">Edit</button>
 
+                            <!-- <button class="btn" data-bind="click: $parent.selectAddress">Edit</button>-->
+                            <button class="btn btn-danger btn-sm" data-bind="click: $parent.askDelete">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <!-- Table -->
-        <table class="table" data-bind="foreach: addresses">
-            <tr data-bind="attr: { adrid: id }">
-                <td data-bind="text: preName, click:$parent.selectAddress"></td>
-                <td data-bind="text: name"></td>
-                <td>
-                    <button type="button" class="btn btn-default" data-bind="click: $parent.editAddress">Edit</button>
-
-                    <!-- <button class="btn" data-bind="click: $parent.selectAddress">Edit</button>-->
-                    <button class="btn btn-danger" data-bind="click: $parent.askDelete">Delete</button></td>
-            </tr>
-        </table>
     </div>
 
-    <button class="btn btn-success" data-bind="click: createAddress">Add (Ctrl+A)</button>
+    <button class="btn btn-success" data-bind="click: createAddress">Add a new Address <small>(Alt+N)</small></button>
     <!--
     <div data-bind="with:selectedAddress">
     <form class="form-inline" data-bind="submit: $parent.submitAddress">

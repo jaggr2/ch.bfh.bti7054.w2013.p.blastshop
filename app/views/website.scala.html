@@ -1,0 +1,15 @@
+@(websiteItem : Website)
+@import actions.GlobalContextHelper
+
+@scripts = {
+}
+
+@styles = {
+}
+
+@main(websiteItem.getTitle(GlobalContextHelper.getUserLanguage()),"website", scripts, styles, null) {
+    <div class="jumbotron">
+        <h1>@websiteItem.getTitle(GlobalContextHelper.getUserLanguage())</h1>
+        @Html(websiteItem.getContent(GlobalContextHelper.getUserLanguage()))
+    </div>
+}

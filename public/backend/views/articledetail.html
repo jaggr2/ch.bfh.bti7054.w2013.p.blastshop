@@ -1,0 +1,155 @@
+<section data-bind="with:currentArticle">
+    <h2 data-bind="html: id.formattedTitle"></h2>
+    <div>
+        <form class="form" data-bind="submit: submitArticle">
+            <div id="options-tabs">
+                <ul class="nav nav-tabs">
+                    <!-- ko foreach: options -->
+                    <li data-bind="css: { active: id.isSelected }">
+                        <a data-toggle="tab" href="#" data-bind="click: $parent.selectedArticleOption, text: id.displayName">Option</a>
+                    </li>
+                    <!-- /ko -->
+                    <li><button type="button" class="btn btn-success btn-xs" data-bind="click: addArticleOption">Add</button></li>
+                </ul>
+
+                <div class="tab-content" data-bind="foreach: options">
+                    <div class="tab-pane panel-body" data-bind="css: { active: id.isSelected }">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">
+                                        Article <span data-bind="text: number">number</span> Details
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <label for="number">Number</label>
+                                                    <input class="form-control" name="number" id="number" data-bind="value: number" placeholder="Number" type="text" required autofocus />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <label for="unit">Unit</label>
+                                                    <select class="form-control" data-bind="options: allUnits, optionsText: 'displayName', value: unit, optionsCaption: 'Unit...'" id="unit" required></select>
+                                                </div>
+                                                <div class="col-xs-3 col-md-3">
+                                                    <label for="sellPrice">Sell price</label>
+                                                    <input class="form-control" name="sellPrice" id="sellPrice" data-bind="value: sellPrice" placeholder="0.00" type="text" required />
+
+                                                </div>
+                                                <div class="col-xs-3 col-md-3">
+                                                    <label for="sellPriceCurrency">Currency</label>
+                                                    <select class="form-control col-md-1" data-bind="options: allCurrencies, optionsText: 'displayName', value: sellPriceCurrency, optionsCaption: 'Currency...'" id="sellPriceCurrency" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <label for="collection">Collection</label>
+                                                    <input class="form-control" name="collection" id="collection"  placeholder="Collection" type="text" /> <!-- data-bind="value: collection" -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">
+                                        Article <span data-bind="text: number">number</span> Pictures
+                                        <button class="btn btn-info btn-xs" data-target="#fileUploadModal" data-toggle="modal" >Upload</button>
+                                    </div>
+                                    <div class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">Article <span data-bind="text: number">number</span> Titles
+                                        <div class="pull-right"><button type="button" class="btn btn-xs btn-success" data-bind="click: addArticleLang">Add</button></div></div>
+                                    <div class="panel-body" data-bind="foreach: languages">
+                                        <div class="form-group" >
+                                            <div class="row">
+                                                <div class="col-xs-3 col-md-3">
+                                                    <label for="languageCodeTitle">Language</label>
+                                                    <select class="form-control" data-bind="options: allLanguages, optionsText: 'englishName', value: language, optionsCaption: 'Language...'" id="languageCodeTitle"></select>
+                                                </div>
+                                                <div class="col-xs-8 col-md-8">
+                                                    <label for="title">Title</label>
+                                                    <textarea class="form-control" name="title" id="title" data-bind="value: title" placeholder="Title"></textarea>
+                                                </div>
+                                                <div class="col-xs-1 col-md-1" style="padding-top: 25px;">
+                                                    <button type="button" class="btn btn-xs btn-danger" data-bind="click: $parent.removeArticleLang">x</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">Article <span data-bind="text: number">number</span> Descriptions
+                                        <div class="pull-right"><button type="button" class="btn btn-xs btn-success" data-bind="click: addArticleLang">Add</button></div></div>
+                                    <div class="panel-body" data-bind="foreach: languages">
+                                        <div class="form-group" >
+                                            <div class="row">
+                                                <div class="col-xs-3 col-md-3">
+                                                    <label for="languageCode">Language</label>
+
+                                                    <select class="form-control" data-bind="options: allLanguages, optionsText: 'englishName', value: language, optionsCaption: 'Language...'" id="languageCode"></select>
+
+                                                    <!-- <select class="form-control" data-bind="value: languageCode" id="languageCode" >       optionsValue: 'code',
+                                                        <option value=""></option>
+                                                        <option value="deu">German</option>
+                                                        <option value="eng">English</option>
+                                                        <option value="fra">French</option>
+                                                    </select> -->
+                                                </div>
+                                                <div class="col-xs-8 col-md-8">
+                                                    <label for="description">Description</label>
+                                                    <textarea class="form-control" name="description" id="description" data-bind="value: description" placeholder="Description"></textarea>
+                                                </div>
+                                                <div class="col-xs-1 col-md-1" style="padding-top: 25px;">
+                                                    <button type="button" class="btn btn-xs btn-danger" data-bind="click: $parent.removeArticleLang">x</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group pull-right">
+                                <button type="button" class="btn btn-danger" data-bind="click: $parent.removeArticleOption">Delete Option</button>
+                                <button type="button" class="btn btn-info" data-bind="click: $parent.copyArticleOption">Copy Option</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <!--
+
+                        -->
+            <hr />
+            <div class="container row">
+                <button type="button" class="btn btn-default" data-bind="click: $parent.closeArticle">Close <small>(ESC)</small></button>
+                <button type="submit" class="btn btn-primary">Save <small>(ALT+S)</small></button>
+                <button type="button" class="btn btn-danger" data-bind="click: $parent.askDeleteArticle, visible: !isNew()">Delete <small>(ALT+DELETE)</small></button>
+                <button type="button" class="btn btn-success" data-bind="click: $parent.createArticle, visible: !isNew()">Create <small>(ALT+N)</small></button>
+                <button type="button" class="btn btn-info" data-bind="click: $parent.copyArticle, visible: !isNew()">Copy <small>(ALT+C)</small></button>
+            </div>
+        </form>
+    </div>
+</section>

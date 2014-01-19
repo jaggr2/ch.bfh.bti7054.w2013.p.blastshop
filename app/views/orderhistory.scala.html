@@ -1,0 +1,153 @@
+@(loginForm: Form[_], orders : List[Document])
+@import actions.UserAddress
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(_bootstrapInputHelper.f) }
+
+@scripts = {
+}
+
+@styles = {
+}
+
+@main("Bestellverlauf","history", scripts, styles, null) {
+
+        <h1>Bestellverlauf</h1>
+    @if( UserAddress.current() != null ) {
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th width='10%'>Bestell-Nr.</th>
+                    <th class='' width='15%'>Datum</th>
+                    <th class='' width='25%'>Artikel</th>
+                    <th class='' width='10%'>Total</th>
+                    <th class='' width='10%'>Status</th>
+                    <th width='10%'> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(row <- orders) {
+                <tr>
+                    <td>@row.id
+                    </td>
+                    <td class=''>@FrontendBasicController.formatDate(row.createdOn)
+                    </td>
+                    <td class=''><ul>@for(articlerow <- row.rows) {
+                       <li>@(FrontendBasicController.formatDecimal(articlerow.quantity,"0.##"))x @articlerow.articleOption.number (@FrontendBasicController.formatDecimal(articlerow.price,"#.00"))</li>
+                    } </ul>
+                    </td>
+                    <td class=''>@FrontendBasicController.formatDecimal(row.calculateTotal(),"#.00")
+                    </td>
+                    <td class=''>In Bearbeitung
+                    </td>
+                    <td>
+                        <a href="@routes.ShopController.getPDF(row.id)" class="btn btn-default" target="_blank">Bestellbestätigung als PDF</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+
+        } else {
+            <h3 class="form-title">@Messages("playauthenticate.login.title")</h3>
+            @if(flash.contains(FrontendBasicController.FLASH_ERROR_KEY)) {
+                <div class="alert alert-error">
+                    <button class="close" data-dismiss="alert"></button>
+                    @flash().get(FrontendBasicController.FLASH_ERROR_KEY)
+                </div>
+            }
+
+            @if(flash.contains(FrontendBasicController.FLASH_INFO_KEY)) {
+                <div class="alert alert-success">
+                    <button class="close" data-dismiss="alert"></button>
+                    @flash().get(FrontendBasicController.FLASH_INFO_KEY)
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-6">
+
+                        <!-- BEGIN LOGIN FORM -->
+                    @* Display proprietary login form *@
+                    @helper.form(routes.Signup.doLogin, 'class -> "form-vertical login-form") {
+
+
+                        @if(loginForm.hasGlobalErrors) {
+                            <div class="alert alert-error">
+                                <button class="close" data-dismiss="alert"></button>
+                                <span>@loginForm.globalError.message</span>
+                            </div>
+                        }
+
+
+                        @inputText(
+                            loginForm("email"),
+                            '_showConstraints -> false,
+                            '_label -> Messages("playauthenticate.login.email.placeholder"),
+                            '_iconclass -> "icon-user",
+                            'class -> "form-control",
+                            '_labelclass -> "col-sm-4",
+                            '_souroundingclass -> "col-sm-8",
+                            'placeholder -> Messages("playauthenticate.login.email.placeholder")
+                        )
+
+                        @inputPassword(
+                            loginForm("password"),
+                            '_showConstraints -> false,
+                            '_label -> Messages("playauthenticate.login.password.placeholder"),
+                            '_iconclass -> "icon-lock",
+                            'class -> "form-control",
+                            '_labelclass -> "col-sm-4",
+                            '_souroundingclass -> "col-sm-8",
+                            'placeholder -> Messages("playauthenticate.login.password.placeholder")
+                        )
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" value="1" /> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default" id="register-submit-btn">Login <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-offset-1 col-md-5">
+
+                    @Messages("playauthenticate.signup.oauth")
+                    <br />
+                    <br />
+                    @* Display list of available providers *@
+                    @_providerPartial(skipCurrent=false)
+
+                    <br />
+                    <br />
+                    <div class="forget-password">
+                        <h4>Forgot your password ?</h4>
+                        <p>
+                            no worries, click <a href="@routes.Signup.forgotPassword()" class="" id="forget-password">here</a>
+                            to reset your password.
+                        </p>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="create-account">
+                        <h4>Don't have an account yet ?&nbsp;</h4>
+                        <p>
+                            <a href="@routes.Signup.signup()" id="register-btn" class="">Create an account</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        }
+}
